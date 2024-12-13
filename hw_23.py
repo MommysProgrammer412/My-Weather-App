@@ -15,3 +15,17 @@ def format_weather_message(weather_dict: dict) -> str:
     feels_like = weather_dict['main']['feels_like']
     description = weather_dict['weather'][0]['description']
     return(f'Температура: {temp}°C\nОщущаетя: {feels_like}°C\nОписание погоды: {description}')
+
+def notify_weather(meaasge: str) -> None:
+    notification.notify(
+    title = f'Погода в {CITY}е',
+    message = meaasge,
+    app_name = 'My Weather App',
+    app_icon = None,)
+
+def main():
+    weather_dict = get_weather(CITY, API_KEY)
+    message = format_weather_message(weather_dict)
+    notify_weather(message)
+
+main()
